@@ -513,13 +513,16 @@ elif pagina == "Riesgo y volatilidad":
 
     st.subheader("Resultados")
 
+    
     st.dataframe(
         indicadores.style.format({
             "Rendimiento acumulado": "{:.2%}",
-            "Volatilidad anualizada": "{:.2%}"
+            "Volatilidad anualizada": "{:.2%}",
+            "Máxima caída": "{:.2%}"
         }),
         use_container_width=True
     )
+
 
 # DATOS Y METODOLOGÍA
 elif pagina == "Datos y metodología":
