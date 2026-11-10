@@ -428,6 +428,53 @@ elif pagina == "Comparación":
 
         st.plotly_chart(fig, use_container_width=True)
 
+        # =========================================
+        # COMPARACION RIESGO Y RENDIMIENTO
+        # =========================================
+
+        st.divider()
+
+        st.subheader("Relación riesgo y rendimiento")
+
+        comparacion_riesgo = indicadores.reset_index()
+
+        comparacion_riesgo = comparacion_riesgo.rename(
+            columns={"index": "Commodity"}
+        )
+
+        figura_riesgo = px.scatter(
+            comparacion_riesgo,
+            x="Volatilidad anualizada",
+            y="Rendimiento acumulado",
+            color="Commodity",
+            text="Commodity",
+            size_max=20,
+            title="Rendimiento acumulado frente a volatilidad"
+        )
+
+        figura_riesgo.update_layout(
+            template="plotly_dark",
+            title_x=0.5,
+            height=500,
+            xaxis_title="Volatilidad anualizada",
+            yaxis_title="Rendimiento acumulado"
+        )
+
+        figura_riesgo.update_traces(
+            textposition="top center"
+        )
+
+        st.plotly_chart(
+            figura_riesgo,
+            use_container_width=True
+        )
+
+        st.caption(
+            "Cada punto representa un commodity. El gráfico "
+            "permite comparar el rendimiento acumulado con "
+            "la volatilidad anualizada del período."
+        )
+
         st.subheader("Indicadores comparativos")
 
         st.dataframe(
