@@ -10,26 +10,62 @@ st.set_page_config(
     layout="wide"
 )
 
+
 st.markdown("""
 <style>
 .stApp {
     background-color: #101827;
     color: #FFFFFF;
 }
+
 [data-testid="stSidebar"] {
     background-color: #172438;
 }
+
+[data-testid="stSidebar"] * {
+    color: #FFFFFF !important;
+}
+
 [data-testid="stMetric"] {
     background-color: #1D2D43;
     padding: 18px;
     border-radius: 12px;
-    border: 1px solid #34465C;
+    border: 1px solid #D6A84B;
 }
+
+[data-testid="stMetricLabel"] {
+    color: #FFFFFF !important;
+}
+
+[data-testid="stMetricValue"] {
+    color: #F2C45B !important;
+}
+
 h1, h2, h3 {
     color: #E7B84B;
 }
+
+.stDownloadButton button {
+    background-color: #D6A84B !important;
+    color: #101827 !important;
+    border: none !important;
+    font-weight: bold !important;
+    border-radius: 8px !important;
+}
+
+.stDownloadButton button:hover {
+    background-color: #F2C45B !important;
+    color: #101827 !important;
+}
+
+.stButton button {
+    background-color: #D6A84B;
+    color: #101827;
+}
+
 </style>
 """, unsafe_allow_html=True)
+
 
 ACTIVOS = {
     "Oro": "GC=F",
