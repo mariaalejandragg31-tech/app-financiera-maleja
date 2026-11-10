@@ -246,6 +246,80 @@ if pagina == "Inicio":
             help="Rendimiento acumulado del período seleccionado"
         )
 
+    # ======================================
+    # CONCLUSIONES FINANCIERAS AUTOMÁTICAS
+    # ======================================
+
+    st.divider()
+
+    st.header("Conclusiones financieras")
+
+    mayor_rendimiento = indicadores[
+        "Rendimiento acumulado"
+    ].idxmax()
+
+    menor_rendimiento = indicadores[
+        "Rendimiento acumulado"
+    ].idxmin()
+
+    mayor_volatilidad = indicadores[
+        "Volatilidad anualizada"
+    ].idxmax()
+
+    menor_volatilidad = indicadores[
+        "Volatilidad anualizada"
+    ].idxmin()
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+        st.success(
+            f"Mayor rendimiento histórico: {mayor_rendimiento} "
+            f"({indicadores.loc[mayor_rendimiento, 'Rendimiento acumulado']:.2%})"
+        )
+
+        st.info(
+            f"Menor rendimiento histórico: {menor_rendimiento} "
+            f"({indicadores.loc[menor_rendimiento, 'Rendimiento acumulado']:.2%})"
+        )
+
+    with col2:
+        st.warning(
+            f"Mayor volatilidad: {mayor_volatilidad} "
+            f"({indicadores.loc[mayor_volatilidad, 'Volatilidad anualizada']:.2%})"
+        )
+
+        st.info(
+            f"Menor volatilidad: {menor_volatilidad} "
+            f"({indicadores.loc[menor_volatilidad, 'Volatilidad anualizada']:.2%})"
+        )
+
+    st.subheader("Interpretación financiera")
+
+    st.write(
+        f"Durante el período seleccionado, {mayor_rendimiento} "
+        "registró el mayor rendimiento acumulado de los activos "
+        "analizados. Esto representa el mayor incremento relativo "
+        "entre su precio inicial y final."
+    )
+
+    st.write(
+        f"Por otra parte, {mayor_volatilidad} presentó la mayor "
+        "volatilidad anualizada, lo que indica una mayor variabilidad "
+        "histórica de sus rendimientos diarios."
+    )
+
+    st.write(
+        f"{menor_volatilidad} presentó la menor volatilidad "
+        "anualizada dentro del período estudiado."
+    )
+
+    st.caption(
+        "Estas conclusiones describen exclusivamente el comportamiento "
+        "histórico. No constituyen pronósticos ni recomendaciones "
+        "de inversión."
+    )
+
     st.subheader("Evolución comparativa")
 
     fig = px.line(
