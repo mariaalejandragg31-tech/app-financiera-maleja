@@ -476,6 +476,41 @@ elif pagina == "Riesgo y volatilidad":
 
     st.plotly_chart(fig, use_container_width=True)
 
+    st.subheader("Análisis de máxima caída")
+
+    caidas = indicadores[
+        ["Máxima caída"]
+    ].reset_index()
+
+    caidas.columns = [
+        "Commodity",
+        "Máxima caída"
+    ]
+
+    caidas["Caída (%)"] = (
+        caidas["Máxima caída"] * 100
+    )
+
+    figura_caidas = px.bar(
+        caidas,
+        x="Commodity",
+        y="Caída (%)",
+        color="Commodity",
+        title="Máxima caída histórica (Maximum Drawdown)",
+        text="Caída (%)"
+    )
+
+    figura_caidas.update_layout(
+        template="plotly_dark",
+        title_x=0.5,
+        height=450
+    )
+
+    st.plotly_chart(
+        figura_caidas,
+        use_container_width=True
+    )
+
     st.subheader("Resultados")
 
     st.dataframe(
