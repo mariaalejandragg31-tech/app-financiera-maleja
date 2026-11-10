@@ -192,12 +192,13 @@ st.sidebar.caption("Panel de análisis financiero")
 pagina = st.sidebar.radio(
     "NAVEGACIÓN",
     [
-        "Inicio",
-        "Análisis individual",
-        "Comparación",
-        "Riesgo y volatilidad",
-        "Datos y metodología"
-    ]
+    "Inicio",
+    "Análisis individual",
+    "Comparación",
+    "Riesgo y volatilidad",
+    "Análisis estadístico (EDA)",
+    "Datos y metodología"
+]
 )
 
 st.sidebar.divider()
