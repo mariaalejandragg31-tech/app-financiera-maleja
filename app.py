@@ -113,6 +113,7 @@ def descargar_datos(inicio, fin):
     return resultados
 
 
+
 def calcular_indicadores(datos):
 
     resultados = {}
@@ -126,20 +127,48 @@ def calcular_indicadores(datos):
         if len(precios) < 2:
             continue
 
+        # Precios inicial y final
+        precio_inicial = precios.iloc[0]
+        precio_final = precios.iloc[-1]
+
+        # Rendimiento acumulado
+        rendimiento = (
+            precio_final / precio_inicial - 1
+        )
+
+        # Volatilidad anualizada
+        volatilidad = (
+            rendimientos.std() * np.sqrt(252)
+        )
+
+        # Máximo drawdown
+        maximos_acumulados = precios.cummax()
+
+        drawdown = (
+            precios / maximos_acumulados
+        ) - 1
+
+        max_drawdown = drawdown.min()
+
         resultados[nombre] = {
-            "Precio inicial": precios.iloc[0],
-            "Precio final": precios.iloc[-1],
-            "Rendimiento acumulado": (
-                precios.iloc[-1] / precios.iloc[0] - 1
-            ),
-            "Volatilidad anualizada": (
-                rendimientos.std() * np.sqrt(252)
-            ),
+
+            "Precio inicial": precio_inicial,
+
+            "Precio final": precio_final,
+
+            "Rendimiento acumulado": rendimiento,
+
+            "Volatilidad anualizada": volatilidad,
+
+            "Máxima caída": max_drawdown,
+
             "Precio máximo": precios.max(),
+
             "Precio mínimo": precios.min()
         }
 
     return pd.DataFrame(resultados).T
+
 
 
 # ENCABEZADO
