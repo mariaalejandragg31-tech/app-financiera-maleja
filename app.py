@@ -475,6 +475,39 @@ elif pagina == "Comparación":
             "la volatilidad anualizada del período."
         )
 
+        # ======================================
+        # MATRIZ COMPARATIVA FINANCIERA
+        # ======================================
+
+        st.divider()
+
+        st.header("Matriz de resultados financieros")
+
+        matriz = indicadores.copy()
+
+        matriz.index.name = "Commodity"
+
+        st.dataframe(
+            matriz.style.format({
+                "Precio inicial": "{:,.2f}",
+                "Precio final": "{:,.2f}",
+                "Rendimiento acumulado": "{:.2%}",
+                "Volatilidad anualizada": "{:.2%}",
+                "Máxima caída": "{:.2%}",
+                "Precio máximo": "{:,.2f}",
+                "Precio mínimo": "{:,.2f}"
+            }),
+            use_container_width=True
+        )
+
+        st.download_button(
+            "Descargar matriz comparativa",
+            data=matriz.to_csv().encode("utf-8"),
+            file_name="matriz_financiera_maleja.csv",
+            mime="text/csv",
+            key="descargar_matriz"
+        )
+
         st.subheader("Indicadores comparativos")
 
         st.dataframe(
