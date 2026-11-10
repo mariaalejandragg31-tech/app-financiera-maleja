@@ -511,6 +511,76 @@ elif pagina == "Riesgo y volatilidad":
         use_container_width=True
     )
 
+    # =========================================
+    # VOLATILIDAD MOVIL DE 30 DIAS
+    # =========================================
+
+    st.divider()
+
+    st.subheader("Evolución de la volatilidad móvil")
+
+    volatilidades_moviles = []
+
+    for nombre, df in datos.items():
+
+        serie = df[["Date", "Close"]].copy()
+
+        serie = serie.sort_values("Date")
+
+        serie["Rendimiento diario"] = (
+            serie["Close"].pct_change()
+        )
+
+        serie["Volatilidad móvil"] = (
+            serie["Rendimiento diario"]
+            .rolling(window=30)
+            .std() * np.sqrt(252) * 100
+        )
+
+        serie["Commodity"] = nombre
+
+        volatilidades_moviles.append(
+            serie[
+                ["Date", "Volatilidad móvil", "Commodity"]
+            ]
+        )
+
+    volatilidad_movil_df = pd.concat(
+        volatilidades_moviles,
+        ignore_index=True
+    )
+
+    figura_movil = px.line(
+        volatilidad_movil_df,
+        x="Date",
+        y="Volatilidad móvil",
+        color="Commodity",
+        title="Volatilidad anualizada móvil de 30 días",
+        labels={
+            "Date": "Fecha",
+            "Volatilidad móvil": "Volatilidad (%)",
+            "Commodity": "Commodity"
+        }
+    )
+
+    figura_movil.update_layout(
+        template="plotly_dark",
+        title_x=0.5,
+        height=500,
+        hovermode="x unified"
+    )
+
+    st.plotly_chart(
+        figura_movil,
+        use_container_width=True
+    )
+
+    st.caption(
+        "La volatilidad móvil utiliza los últimos 30 "
+        "rendimientos diarios disponibles y se anualiza "
+        "con 252 días de negociación."
+    )
+
     st.subheader("Resultados")
 
     
