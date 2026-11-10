@@ -171,6 +171,7 @@ def calcular_indicadores(datos):
 
 
 
+
 # ENCABEZADO
 st.title("📊 APP FINANCIERA MALEJA")
 
