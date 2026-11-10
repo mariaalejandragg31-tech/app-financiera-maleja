@@ -22,46 +22,46 @@ st.markdown("""
     background-color: #172438;
 }
 
-[data-testid="stSidebar"] * {
+
+/* Texto general del menú lateral */
+[data-testid="stSidebar"] {
+    background-color: #172438;
+    color: #FFFFFF;
+}
+
+/* Títulos y etiquetas del menú */
+[data-testid="stSidebar"] label,
+[data-testid="stSidebar"] h1,
+[data-testid="stSidebar"] h2,
+[data-testid="stSidebar"] h3,
+[data-testid="stSidebar"] p {
     color: #FFFFFF !important;
 }
 
-[data-testid="stMetric"] {
-    background-color: #1D2D43;
-    padding: 18px;
-    border-radius: 12px;
-    border: 1px solid #D6A84B;
-}
-
-[data-testid="stMetricLabel"] {
-    color: #FFFFFF !important;
-}
-
-[data-testid="stMetricValue"] {
-    color: #F2C45B !important;
-}
-
-h1, h2, h3 {
-    color: #E7B84B;
-}
-
-.stDownloadButton button {
-    background-color: #D6A84B !important;
-    color: #101827 !important;
-    border: none !important;
-    font-weight: bold !important;
+/* Campos de selección de fechas */
+[data-testid="stSidebar"] [data-testid="stDateInput"] input {
+    background-color: #FFFFFF !important;
+    color: #172438 !important;
+    border: 1px solid #D6A84B !important;
     border-radius: 8px !important;
 }
 
-.stDownloadButton button:hover {
-    background-color: #F2C45B !important;
-    color: #101827 !important;
+/* Iconos de calendario */
+[data-testid="stSidebar"] [data-testid="stDateInput"] button {
+    color: #172438 !important;
 }
 
-.stButton button {
-    background-color: #D6A84B;
-    color: #101827;
+/* Calendario desplegable */
+[data-testid="stDateInput"] [role="dialog"] {
+    color: #172438 !important;
 }
+
+/* Valores de los controles */
+[data-testid="stSidebar"] input,
+[data-testid="stSidebar"] select {
+    color: #172438 !important;
+}
+
 
 </style>
 """, unsafe_allow_html=True)
